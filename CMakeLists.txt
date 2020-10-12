@@ -25,3 +25,6 @@ add_library(Digi SHARED digitize.C)
 
 add_executable(ECALsmear smearECAL.C)
 target_link_libraries(ECALsmear PUBLIC Musep Digi evtinfo)
+
+add_executable(ReadAnaEvt read_anaevt.C)
+target_link_libraries(ReadAnaEvt PUBLIC evtinfo)
