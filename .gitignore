@@ -1,0 +1,13 @@
+ECALsmear
+CMakeFiles/
+compile_commands.json
+CMakeCache.txt
+G__Event.cxx
+libEvent_rdict.pcm
+*.so
+libEvent.rootmap
+Makefile
+test.root
+a.out
+cmake_install.cmake
+test*
