@@ -1178,10 +1178,10 @@ bool smearNeutron(int trackid){
   
   double P_smear;
   double P=event->Trajectories[trackid].InitialMomentum.P();
-  bool PequationSmearSucceed=false;
-  if(ana->isHtarget && isCC) PequationSmearSucceed=smearN_byEquation(P_smear, trackid);
+  // bool PequationSmearSucceed=false;
+  //  if(ana->isHtarget && isCC) PequationSmearSucceed=smearN_byEquation(P_smear, trackid);
 
-  if(!isCC || !PequationSmearSucceed || !ana->isHtarget)  {
+  // if(!isCC || !PequationSmearSucceed || !ana->isHtarget)  {
     double E=event->Trajectories[trackid].InitialMomentum.E();
     //    double m=event->Trajectories[trackid].InitialMomentum.Mag();
     double beta=P/E;
@@ -1194,7 +1194,7 @@ bool smearNeutron(int trackid){
     herr_p_beta_N->Fill((P_smear-P)/P*100);
 
     //    std::cout<<"beta:"<<beta<<" beta_smear:"<<beta_smear<<" P_smear:"<<P_smear<<std::endl;
-  }
+    //  }
   /*
   double Phi=event->Trajectories[trackid].InitialMomentum.Phi(); // -pi , pi
   double Theta=event->Trajectories[trackid].InitialMomentum.Theta(); // 0 - pi
@@ -1219,8 +1219,8 @@ bool smearNeutron(int trackid){
   //  if(PequationSmearSucceed) fill1Par2tree(Px_smear, Py_smear, Pz_smear , trackid, -999, -999, -999, "NsmearEqua");
   //  else fill1Par2tree(Px_smear, Py_smear, Pz_smear , trackid, -999, -999, -999, "NsmearBeta");
 
-  if(PequationSmearSucceed) fill1Par(Px_smear, Py_smear, Pz_smear , trackid, -999, -999, -999, NsmearEqua);
-  else fill1Par(Px_smear, Py_smear, Pz_smear , trackid, -999, -999, -999, NsmearBeta);
+  //  if(PequationSmearSucceed) fill1Par(Px_smear, Py_smear, Pz_smear , trackid, -999, -999, -999, NsmearEqua);
+  fill1Par(Px_smear, Py_smear, Pz_smear , trackid, -999, -999, -999, NsmearBeta);
 
   double Theta=event->Trajectories[trackid].InitialMomentum.Theta();
   double theta_Smear=atan(sqrt(Px_smear*Px_smear+Py_smear*Py_smear)/Pz_smear);
@@ -1552,25 +1552,25 @@ void smearEvent(){
   //  treefile.close();
 
   int nPrim= event->Primaries.begin()->Particles.size();
-  bool havePrimNeutron=false;
-  bool NeutronAtLast=false;
+  //  bool havePrimNeutron=false;
+  //  bool NeutronAtLast=false;
   int neutron_trackid;
-  if(ana->isHtarget) havePrimNeutron=checkPrimNeutron(NeutronAtLast, neutron_trackid);
-  if(isCC && ana->isHtarget && havePrimNeutron && (!NeutronAtLast)) {
-    for (int i=0;i<nPrim;i++){      
-      if(event->Primaries.begin()->Particles[i].TrackId==neutron_trackid) continue;
-      if(debug>=2) std::cout<<" +++++++++++++++++++++++++++++++++++++++++++++++++++++smearPar: "<<event->Primaries.begin()->Particles[i].Name<<" id: "<<event->Primaries.begin()->Particles[i].TrackId<<std::endl;
-      smearPar(event->Primaries.begin()->Particles[i].TrackId , event->Primaries.begin()->Particles[i].Name);
-    }
-    if(debug>=2)   std::cout<<"smear neutron at the very end since its a numubar hydrogen target event"<<std::endl;
-    smearNeutron(neutron_trackid);
-  }
-  else {
+  // if(ana->isHtarget) havePrimNeutron=checkPrimNeutron(NeutronAtLast, neutron_trackid);
+  // if(isCC && ana->isHtarget && havePrimNeutron && (!NeutronAtLast)) {
+  //   for (int i=0;i<nPrim;i++){      
+  //     if(event->Primaries.begin()->Particles[i].TrackId==neutron_trackid) continue;
+  //     if(debug>=2) std::cout<<" +++++++++++++++++++++++++++++++++++++++++++++++++++++smearPar: "<<event->Primaries.begin()->Particles[i].Name<<" id: "<<event->Primaries.begin()->Particles[i].TrackId<<std::endl;
+  //     smearPar(event->Primaries.begin()->Particles[i].TrackId , event->Primaries.begin()->Particles[i].Name);
+  //   }
+  //   if(debug>=2)   std::cout<<"smear neutron at the very end since its a numubar hydrogen target event"<<std::endl;
+  //   smearNeutron(neutron_trackid);
+  // }
+  //  else {
     for (int i=0;i<nPrim;i++){
       if(debug>=2) std::cout<<"++++++++++++++++++++++++++++++++++++++++++++++++++smearPar: "<<event->Primaries.begin()->Particles[i].Name<<" id: "<<event->Primaries.begin()->Particles[i].TrackId<<std::endl;
       smearPar(event->Primaries.begin()->Particles[i].TrackId , event->Primaries.begin()->Particles[i].Name);
     }
-  }
+    //  }
   //  std::cout<<"iFillPar:"<<iFillPar<<std::endl;
   //  if(iFillPar==0) return;
   if(oneevent->particles.size()==0) return;
