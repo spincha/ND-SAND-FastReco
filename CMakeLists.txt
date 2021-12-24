@@ -23,8 +23,8 @@ target_link_libraries(Musep PUBLIC edepsim_io ${ROOT_LIBRARIES})
 add_library(Digi SHARED digitize.C)
 
 
-add_executable(ECALsmear smearECAL.C)
-target_link_libraries(ECALsmear PUBLIC Musep Digi evtinfo)
+add_executable(sandSmearGo smearSAND.C)
+target_link_libraries(sandSmearGo PUBLIC Musep Digi evtinfo)
 
 add_executable(ReadAnaEvt read_anaevt.C)
 target_link_libraries(ReadAnaEvt PUBLIC evtinfo)
