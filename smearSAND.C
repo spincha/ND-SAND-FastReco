@@ -26,6 +26,7 @@
 #include "TGeoTube.h"
 #include <TTree.h>
 #include "TDatabasePDG.h"
+#include "TObjString.h"
 
 #include "TG4Event.h"
 #include <cstring>
